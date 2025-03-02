@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksplorasi Kawasan Transmigrasi - TRANS TUNTAS</title>
+    
+    <!-- Three.js untuk visualisasi 3D -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Pannellum untuk panorama 360° -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    
+    <!-- GSAP untuk animasi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    
+    <link rel="stylesheet" href="css/immersive-style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Overlay untuk navigasi -->
+        <div id="map-overlay">
+            <div id="map-container">
+                <!-- Peta interaktif akan ditampilkan di sini -->
+            </div>
+            <button id="toggle-map">Lihat Peta</button>
+        </div>
+        
+        <!-- Container untuk panorama 360° -->
+        <div id="panorama"></div>
+        
+        <!-- Container untuk visualisasi 3D -->
+        <div id="scene-container"></div>
+        
+        <!-- Navigasi titik-titik penting -->
+        <div id="poi-navigation">
+            <ul>
+                <li data-poi="desa">Desa Transmigrasi</li>
+                <li data-poi="hutan">Kawasan Hutan</li>
+                <li data-poi="sungai">Tepi Sungai</li>
+                <li data-poi="pertanian">Lahan Pertanian</li>
+                <li data-poi="penduduk">Kehidupan Penduduk</li>
+            </ul>
+        </div>
+        
+        <!-- Panel informasi -->
+        <div id="info-panel" class="hidden">
+            <div class="close-btn">×</div>
+            <div class="info-content"></div>
+        </div>
+        
+        <!-- Overlay untuk storytelling -->
+        <div id="story-overlay" class="hidden">
+            <div class="story-container">
+                <h2 class="story-title"></h2>
+                <p class="story-content"></p>
+                <button class="story-next">Lanjutkan</button>
+            </div>
+        </div>
+        
+        <!-- Tombol navigasi mobile -->
+        <div id="mobile-controls">
+            <div class="control-hint">Gerakkan ponsel untuk melihat sekeliling</div>
+            <button id="mobile-toggle">OK</button>
+        </div>
+        
+        <!-- Tombol aksi -->
+        <div id="action-buttons">
+            <button id="become-protector">Dukung Program Transmigrasi</button>
+            <button id="share-button">Bagikan</button>
+        </div>
+        
+        <!-- Tombol kembali ke beranda -->
+        <div id="back-to-home">
+            <a href="index.html">Kembali ke Beranda</a>
+        </div>
+    </div>
+    
+    <script src="js/immersive-core.js"></script>
+    <script src="js/panorama-handler.js"></script>
+    <script src="js/story-controller.js"></script>
+    <script src="js/map-controller.js"></script>
+</body>
+</html> 

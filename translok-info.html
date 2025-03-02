@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Transmigrasi Lokal (TRANSLOK) - TRANS TUNTAS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .header-banner {
+            background-color: #b8d1e5;
+            color: #1a2a3a;
+            padding: 20px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .president-banner {
+            background-color: #cc0000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .president-banner img {
+            height: 150px;
+            border-radius: 5px;
+        }
+        
+        .president-banner .text {
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+        
+        .president-banner h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .president-banner h3 {
+            font-size: 1.2em;
+        }
+        
+        .section {
+            background-color: #1a2a3a;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        
+        .section h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+        
+        .columns {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: 300px;
+            margin: 10px;
+        }
+        
+        .state-box {
+            background-color: #1a2a3a;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        
+        .state-box h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .state-box ul {
+            padding-left: 20px;
+        }
+        
+        .state-box li {
+            margin-bottom: 10px;
+            list-style-type: square;
+        }
+        
+        .outcome-box {
+            background-color: #1a2a3a;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .outcome-box h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        
+        .outcome-box ul {
+            padding-left: 20px;
+        }
+        
+        .outcome-box li {
+            margin-bottom: 10px;
+            list-style-type: square;
+        }
+        
+        .arrow {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            color: #ffd700;
+            font-size: 3em;
+            transform: rotate(45deg);
+        }
+        
+        .numbered-list {
+            counter-reset: item;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .numbered-list li {
+            counter-increment: item;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .numbered-list li:before {
+            content: counter(item) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #ffd700;
+        }
+        
+        .challenges {
+            background-color: #1a2a3a;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .challenges h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .challenges ul {
+            display: inline-block;
+            text-align: left;
+        }
+        
+        .challenges li {
+            margin-bottom: 15px;
+            list-style-type: none;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .challenges li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #ffd700;
+        }
+        
+        .news-box {
+            background-color: white;
+            color: black;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .news-box h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .news-box p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            height: 80px;
+            margin-right: 20px;
+        }
+        
+        .logo h1 {
+            color: white;
+            font-size: 1.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="img/logo-transmigrasi.png" alt="Logo Kementerian Transmigrasi">
+            <h1>Kementerian Transmigrasi</h1>
+        </div>
+        
+        <div class="header-banner">
+            PROGRAM TRANSMIGRASI LOKAL (TRANSLOK)
+        </div>
+        
+        <div class="president-banner">
+            <img src="img/presiden.jpg" alt="Presiden Indonesia">
+            <div class="text">
+                <h2>ARAHAN PRESIDEN</h2>
+                <h3>BANGUN KESEJAHTERAAN & KETAHANAN NASIONAL</h3>
+            </div>
+        </div>
+        
+        <div class="columns">
+            <div class="column">
+                <div class="state-box">
+                    <h2>CURRENT STATE</h2>
+                    <ul>
+                        <li>TRANSMIGRASI MASIH DIANGGAP 'HANYA' MEMINDAHKAN PENDUDUK</li>
+                        <li>ADANYA TRANSMIGRAN YANG KEMBALI KE DAERAH ASAL KARENA TIDAK BISA BERADAPTASI DENGAN PERBEDAAN KULTUR</li>
+                        <li>BIAYA PEMBERANGKATAN TRANSMIGRAN YANG BESAR</li>
+                        <li>PEMBANGUNAN YANG BELUM MERATA</li>
+                        <li>ADANYA 'OKNUM' TRANSMIGRAN YANG HANYA MENGINCAR TANAH SHM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="section">
+                    <h2>LATAR BELAKANG</h2>
+                    <p>KONSEP TRANSMIGRASI SELAMA INI IDENTIK DENGAN PERPINDAHAN PENDUDUK DARI DAERAH PADAT KE WILAYAH BARU. NAMUN, DI BANYAK DAERAH, JUSTRU MASYARAKAT SETEMPAT MASIH MENGALAMI KESENJANGAN PEMBANGUNAN, KURANGNYA LAPANGAN KERJA, SERTA MINIMNYA INFRASTRUKTUR PENDUKUNG.</p>
+                    <p>TRANSMIGRASI LOKAL (TRANSLOK) HADIR SEBAGAI SOLUSI DENGAN FOKUS PADA PEMBANGUNAN KAWASAN BERBASIS PENDUDUK ASAL SETEMPAT TANPA PERPINDAHAN JAUH, SEHINGGA MAMPU MENCIPTAKAN PESAT EKONOMI BARU YANG MANDIRI DAN KOMPETITIF.</p>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="state-box">
+                    <h2>DESIRED STATE</h2>
+                    <ul>
+                        <li>TRANSMIGRASI BERPERAN AKTIF DALAM PEMERATAAN PEMBANGUNAN DAN INISIATOR PERTUMBUHAN PUSAT PEREKONOMIAN BARU</li>
+                        <li>PEMAHAMAN PARADIGMA BARU TRANSMIGRASI DI MATA MASYARAKAT</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="columns">
+            <div class="column">
+                <div class="section">
+                    <h2>TUJUAN UTAMA</h2>
+                    <ol class="numbered-list">
+                        <li>MEMBANGUN KOTA BARU DARI DESA</li>
+                        <li>MENGURANGI URBANISASI BERLEBIHAN</li>
+                        <li>MENINGKATKAN KESEJAHTERAAN MASYARAKAT LOKAL</li>
+                        <li>MENGOPTIMALKAN INFRASTRUKTUR DAN SUMBER DAYA LOKAL</li>
+                        <li>MENDORONG KEMANDIRIAN EKONOMI DAERAH</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="section">
+                    <h2>STRATEGI IMPLEMENTASI</h2>
+                    <ol class="numbered-list">
+                        <li>IDENTIFIKASI DAN PENGEMBANGAN WILAYAH PRIORITAS</li>
+                        <li>REVITALISASI INFRASTRUKTUR DASAR</li>
+                        <li>PEMBERDAYAAN EKONOMI BERBASIS POTENSI LOKAL</li>
+                        <li>KOLABORASI DENGAN DUNIA USAHA DAN AKADEMISI</li>
+                        <li>INTEGRASI DENGAN PROGRAM NASIONAL</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="challenges">
+            <h2>TANTANGAN</h2>
+            <ul>
+                <li>KETERSEDIAAN LAHAN DAN KETERBATASAN INFRASTRUKTUR</li>
+                <li>KESIAPAN SDM DAN SOSIAL BUDAYA</li>
+                <li>KETERSEDIAAN ANGGARAN</li>
+            </ul>
+        </div>
+        
+        <div class="outcome-box">
+            <h2>OUTCOME</h2>
+            <ul>
+                <li>PENINGKATAN KESEJAHTERAAN MASYARAKAT LOKAL MELALUI PEMBANGUNAN EKONOMI BERBASIS POTENSI DAERAH</li>
+                <li>PEMBANGUNAN KAWASAN BARU YANG MANDIRI TANPA HARUS MENGANDALKAN PERPINDAHAN PENDUDUK DARI LUAR DAERAH</li>
+                <li>MENGURANGI ARUS URBANISASI DAN MENCIPTAKAN PUSAT PERTUMBUHAN EKONOMI BARU DI WILAYAH PERDESAAN</li>
+                <li>MENINGKATKAN DAYA SAING PRODUK LOKAL HINGGA KE PASAR NASIONAL DAN INTERNASIONAL</li>
+            </ul>
+            <div class="arrow">➤</div>
+        </div>
+        
+        <div class="news-box">
+            <h3>Siap-Siap! Prabowo Mau Sulap Kawasan Transmigrasi Jadi Kota Baru</h3>
+            <p>Merdyanti Ratna, CNBC Indonesia - 6 January 2023, 20:30</p>
+            <p>Presiden Republik Indonesia menyampaikan rencana untuk mengembangkan kawasan transmigrasi menjadi kota-kota baru yang mandiri dan berkelanjutan. Program ini akan fokus pada pengembangan ekonomi lokal dan peningkatan infrastruktur di kawasan transmigrasi yang sudah ada.</p>
+        </div>
+        
+        <div class="section">
+            <h2>SIMULASI KAWASAN</h2>
+            <p>Untuk memahami lebih lanjut tentang konsep pengembangan kawasan transmigrasi lokal, Anda dapat melihat simulasi interaktif kawasan transmigrasi yang telah kami kembangkan.</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="terrain-simulation.html" class="btn btn-primary" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Lihat Simulasi Topografi 3D</a>
+                <a href="index.html" class="btn btn-secondary" style="display: inline-block; padding: 10px 20px; background-color: #555; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-left: 10px;">Kembali ke Beranda</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer style="background-color: #1a2a3a; color: white; text-align: center; padding: 20px; margin-top: 30px;">
+        <p>© 2023 Kementerian Transmigrasi Republik Indonesia - TRANS TUNTAS</p>
+    </footer>
+</body>
+</html> 

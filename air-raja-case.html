@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studi Kasus: Pulau Air Raja, Rempang - TRANS TUNTAS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: #1a2a3a;
+            color: white;
+            padding: 20px;
+            text-align: right;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .logo {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 10px;
+        }
+        
+        .map-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .map-large {
+            flex: 2;
+            min-width: 300px;
+            height: 400px;
+            background-color: #ddd;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .map-small {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+        
+        .map-large img, .map-small img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .photo {
+            width: 32%;
+            height: 250px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo:hover img {
+            transform: scale(1.05);
+        }
+        
+        .info-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .info-section h2 {
+            color: #1a2a3a;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .info-columns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .info-column {
+            flex: 1;
+            min-width: 300px;
+            padding: 0 15px;
+        }
+        
+        .info-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-box h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .stat-box {
+            background-color: #1a2a3a;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 23%;
+            min-width: 200px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-box h3 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #4CAF50;
+        }
+        
+        .stat-box p {
+            margin: 5px 0 0 0;
+        }
+        
+        .implementation-steps {
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            min-width: 80px;
+        }
+        
+        .step-content {
+            padding: 20px;
+        }
+        
+        .step-content h3 {
+            margin-top: 0;
+            color: #1a2a3a;
+        }
+        
+        .cta-section {
+            background-color: #4CAF50;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .cta-section h2 {
+            margin-top: 0;
+            font-size: 2em;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: white;
+            color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #1a2a3a;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-secondary {
+            background-color: #1a2a3a;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #333;
+        }
+        
+        footer {
+            background-color: #1a2a3a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .photo {
+                width: 48%;
+            }
+            
+            .stat-box {
+                width: 48%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .photo {
+                width: 100%;
+            }
+            
+            .stat-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="img/logo-transmigrasi.png" alt="Logo Kementerian Transmigrasi">
+            <h2>TRANS TUNTAS</h2>
+        </div>
+        <h1>PULAU AIR RAJA, REMPANG, KEP.RIAU</h1>
+    </div>
+    
+    <div class="container">
+        <div class="map-container">
+            <div class="map-large">
+                <img src="img/air-raja-map1.jpg" alt="Peta Pulau Air Raja dan sekitarnya">
+            </div>
+            <div class="map-small">
+                <img src="img/air-raja-map2.jpg" alt="Peta detail Pulau Air Raja">
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2>Tentang Pulau Air Raja</h2>
+            <div class="info-columns">
+                <div class="info-column">
+                    <p>Pulau Air Raja merupakan salah satu pulau di Kecamatan Rempang, Kepulauan Riau yang menjadi lokasi implementasi program Transmigrasi Lokal (TRANSLOK). Pulau ini memiliki potensi besar untuk pengembangan ekonomi lokal berbasis kelautan dan pariwisata.</p>
+                    
+                    <div class="info-box">
+                        <h3>Lokasi Strategis</h3>
+                        <p>Terletak di antara Pulau Batam dan Singapura, Pulau Air Raja memiliki posisi strategis yang dapat dikembangkan sebagai hub ekonomi baru di kawasan perbatasan.</p>
+                    </div>
+                </div>
+                
+                <div class="info-column">
+                    <div class="info-box">
+                        <h3>Potensi Ekonomi</h3>
+                        <ul>
+                            <li>Perikanan dan budidaya hasil laut</li>
+                            <li>Pariwisata bahari</li>
+                            <li>Industri pengolahan hasil laut</li>
+                            <li>Perdagangan lintas batas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>Tantangan</h3>
+                        <ul>
+                            <li>Infrastruktur yang masih terbatas</li>
+                            <li>Akses transportasi ke pulau utama</li>
+                            <li>Ketersediaan air bersih</li>
+                            <li>Pengembangan SDM lokal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <h3>1.250</h3>
+                <p>Penduduk Lokal</p>
+            </div>
+            <div class="stat-box">
+                <h3>450</h3>
+                <p>Hektar Lahan</p>
+            </div>
+            <div class="stat-box">
+                <h3>85%</h3>
+                <p>Mata Pencaharian Nelayan</p>
+            </div>
+            <div class="stat-box">
+                <h3>15</h3>
+                <p>Km dari Batam</p>
+            </div>
+        </div>
+        
+        <div class="photo-gallery">
+            <div class="photo">
+                <img src="img/air-raja-school.jpg" alt="Sekolah di Pulau Air Raja">
+            </div>
+            <div class="photo">
+                <img src="img/air-raja-bridge.jpg" alt="Jembatan di Pulau Air Raja">
+            </div>
+            <div class="photo">
+                <img src="img/air-raja-road.jpg" alt="Jalan di Pulau Air Raja">
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2>Implementasi Program TRANSLOK</h2>
+            <p>Program Transmigrasi Lokal di Pulau Air Raja berfokus pada pengembangan kawasan berbasis potensi lokal dengan melibatkan masyarakat setempat. Berikut adalah tahapan implementasi program:</p>
+            
+            <div class="implementation-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Identifikasi dan Pemetaan Potensi</h3>
+                        <p>Melakukan pemetaan potensi sumber daya alam, ekonomi, dan sosial budaya di Pulau Air Raja untuk menentukan fokus pengembangan kawasan.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Pembangunan Infrastruktur Dasar</h3>
+                        <p>Membangun infrastruktur dasar seperti jalan, jembatan, listrik, dan akses air bersih untuk mendukung aktivitas ekonomi dan kehidupan masyarakat.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Pengembangan Fasilitas Publik</h3>
+                        <p>Membangun fasilitas publik seperti sekolah, puskesmas, dan kantor pemerintahan untuk meningkatkan kualitas hidup masyarakat.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Pemberdayaan Ekonomi Lokal</h3>
+                        <p>Mengembangkan program pemberdayaan ekonomi berbasis potensi lokal seperti budidaya perikanan, pengolahan hasil laut, dan pariwisata bahari.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Pengembangan Kapasitas SDM</h3>
+                        <p>Melakukan pelatihan dan pendampingan untuk meningkatkan kapasitas sumber daya manusia lokal dalam mengelola potensi ekonomi kawasan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2>Hasil dan Dampak</h2>
+            <div class="info-columns">
+                <div class="info-column">
+                    <div class="info-box">
+                        <h3>Ekonomi</h3>
+                        <ul>
+                            <li>Peningkatan pendapatan masyarakat sebesar 35%</li>
+                            <li>Terbentuknya 5 kelompok usaha bersama</li>
+                            <li>Pengembangan 3 sentra produksi hasil laut</li>
+                            <li>Peningkatan nilai ekspor hasil laut</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>Infrastruktur</h3>
+                        <ul>
+                            <li>Pembangunan 12 km jalan desa</li>
+                            <li>Instalasi jaringan listrik ke seluruh desa</li>
+                            <li>Pembangunan 2 jembatan penghubung</li>
+                            <li>Sistem penyediaan air bersih</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="info-column">
+                    <div class="info-box">
+                        <h3>Sosial</h3>
+                        <ul>
+                            <li>Peningkatan angka partisipasi sekolah</li>
+                            <li>Penurunan angka urbanisasi ke kota besar</li>
+                            <li>Peningkatan akses layanan kesehatan</li>
+                            <li>Penguatan kelembagaan masyarakat</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>Lingkungan</h3>
+                        <ul>
+                            <li>Konservasi 120 hektar hutan mangrove</li>
+                            <li>Pengembangan energi terbarukan</li>
+                            <li>Pengelolaan sampah terpadu</li>
+                            <li>Rehabilitasi terumbu karang</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>Pelajari Lebih Lanjut Tentang Program TRANSLOK</h2>
+            <p>Program Transmigrasi Lokal (TRANSLOK) merupakan inovasi dalam pembangunan kawasan yang berfokus pada pengembangan potensi lokal dan pemberdayaan masyarakat setempat.</p>
+            <a href="translok-info.html" class="btn">Program TRANSLOK</a>
+            <a href="terrain-simulation.html" class="btn btn-secondary">Simulasi Topografi 3D</a>
+            <a href="index.html" class="btn btn-secondary">Kembali ke Beranda</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 Kementerian Transmigrasi Republik Indonesia - TRANS TUNTAS</p>
+    </footer>
+</body>
+</html> 

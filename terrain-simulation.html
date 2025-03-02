@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Topografi Kawasan Transmigrasi - TRANS TUNTAS</title>
+    <link rel="stylesheet" href="css/terrain-style.css">
+    <!-- Three.js Core -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <!-- Three.js Controls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <!-- Simplex Noise for terrain generation -->
+    <script src="https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.min.js"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    
+    <script>
+        // Fungsi untuk menghapus layar loading
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+                console.log("Loading screen dihapus oleh fungsi hideLoadingScreen");
+            }
+        }
+        
+        // Coba hapus layar loading setelah 10 detik (fallback)
+        window.addEventListener('load', function() {
+            setTimeout(hideLoadingScreen, 10000);
+            console.log("Fallback timer untuk menghapus loading screen diatur");
+        });
+    </script>
+</head>
+<body>
+    <div id="loading">
+        <h2>Memuat Simulasi Kawasan...</h2>
+        <div class="progress">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <!-- Tambahkan tombol untuk menghapus layar loading secara manual -->
+        <button onclick="hideLoadingScreen()" style="margin-top: 20px;">Lanjutkan ke Simulasi</button>
+    </div>
+    
+    <div id="info">
+        <h2>Simulasi Topografi Kawasan Transmigrasi</h2>
+        <p>Gunakan mouse untuk menavigasi:</p>
+        <p>- Klik dan geser untuk memutar kamera</p>
+        <p>- Scroll untuk zoom in/out</p>
+        <p>- Klik kanan dan geser untuk panning</p>
+    </div>
+    
+    <div id="controls">
+        <button id="viewFull">Lihat Seluruh Kawasan</button>
+        <button id="viewHousing">Lihat Perumahan</button>
+        <button id="viewFarms">Lihat Lahan Pertanian</button>
+        <button id="viewInfrastructure">Lihat Infrastruktur</button>
+        <button id="toggleDayNight">Siang/Malam</button>
+    </div>
+
+    <!-- Script aplikasi - pastikan urutan loading benar -->
+    <script>
+        // Fungsi untuk menampilkan loading progress
+        function updateProgress(percent) {
+            const progressBar = document.getElementById('progress-bar');
+            if (progressBar) {
+                progressBar.style.width = percent + '%';
+                console.log("Loading: " + percent + "%");
+            }
+        }
+        
+        // Fungsi untuk memuat script secara berurutan
+        function loadScripts() {
+            updateProgress(10);
+            
+            // Buat elemen script untuk terrain-elements.js
+            const elementsScript = document.createElement('script');
+            elementsScript.src = 'js/terrain-elements.js';
+            elementsScript.onload = function() {
+                updateProgress(40);
+                
+                // Setelah elements dimuat, muat controls
+                const controlsScript = document.createElement('script');
+                controlsScript.src = 'js/terrain-controls.js';
+                controlsScript.onload = function() {
+                    updateProgress(70);
+                    
+                    // Setelah controls dimuat, muat core (yang akan menginisialisasi aplikasi)
+                    const coreScript = document.createElement('script');
+                    coreScript.src = 'js/terrain-core.js';
+                    coreScript.onload = function() {
+                        updateProgress(100);
+                        console.log("Semua script berhasil dimuat!");
+                        
+                        // Coba hapus layar loading setelah semua script dimuat
+                        setTimeout(hideLoadingScreen, 3000);
+                    };
+                    document.body.appendChild(coreScript);
+                };
+                document.body.appendChild(controlsScript);
+            };
+            document.body.appendChild(elementsScript);
+        }
+        
+        // Mulai memuat script setelah halaman dimuat
+        window.addEventListener('load', loadScripts);
+    </script>
+</body>
+</html> 

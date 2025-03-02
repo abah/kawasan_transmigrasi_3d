@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Rumput Realistis</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            width: 250px;
+        }
+        
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        select, input {
+            margin: 5px 0;
+            width: 100%;
+        }
+        
+        .file-input {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div id="controls">
+        <h3>Kontrol Rumput</h3>
+        
+        <div>
+            <label for="grass-type">Tipe Rumput:</label>
+            <select id="grass-type">
+                <option value="procedural">Procedural</option>
+                <option value="local" selected>Model Lokal</option>
+            </select>
+        </div>
+        
+        <div id="local-model-controls">
+            <label for="local-model-path">Path Model Lokal:</label>
+            <input type="text" id="local-model-path" value="/Users/abahraditya/ProyekKawasanTransmigrasi/image/Grass/grass.gltf">
+            <p class="note">Catatan: Pastikan file sudah diekspor ke format .gltf atau .glb</p>
+        </div>
+        
+        <div>
+            <label for="grass-density">Kepadatan (untuk procedural):</label>
+            <select id="grass-density">
+                <option value="low">Rendah</option>
+                <option value="medium" selected>Sedang</option>
+                <option value="high">Tinggi</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="grass-size-width">Lebar Area:</label>
+            <input type="range" id="grass-size-width" min="5" max="50" step="1" value="20">
+            <span id="grass-size-width-value">20</span>
+        </div>
+        
+        <div>
+            <label for="grass-size-height">Panjang Area:</label>
+            <input type="range" id="grass-size-height" min="5" max="50" step="1" value="20">
+            <span id="grass-size-height-value">20</span>
+        </div>
+        
+        <div>
+            <label for="grass-scale">Skala:</label>
+            <input type="range" id="grass-scale" min="0.1" max="2" step="0.1" value="1">
+            <span id="grass-scale-value">1.0</span>
+        </div>
+        
+        <button id="create-grass">Buat Rumput</button>
+        <button id="clear-grass">Hapus Rumput</button>
+    </div>
+    
+    <!-- Three.js dan library pendukung -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+    
+    <!-- Library elemen realistis -->
+    <script src="js/realistic-elements.js"></script>
+    
+    <script>
+        // Inisialisasi scene Three.js
+        let scene, camera, renderer, controls;
+        let grassObjects = [];
+        
+        // Inisialisasi scene
+        function init() {
+            // Buat scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87CEEB);
+            
+            // Buat kamera
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.set(20, 10, 20);
+            camera.lookAt(0, 0, 0);
+            
+            // Buat renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            
+            // Kontrol kamera
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            
+            // Pencahayaan
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(10, 20, 10);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            directionalLight.shadow.camera.near = 0.5;
+            directionalLight.shadow.camera.far = 50;
+            directionalLight.shadow.camera.left = -25;
+            directionalLight.shadow.camera.right = 25;
+            directionalLight.shadow.camera.top = 25;
+            directionalLight.shadow.camera.bottom = -25;
+            scene.add(directionalLight);
+            
+            // Tambahkan ground
+            const groundGeometry = new THREE.PlaneGeometry(100, 100);
+            const groundMaterial = new THREE.MeshStandardMaterial({
+                color: 0x8B4513, // Warna tanah
+                roughness: 0.9,
+                metalness: 0.1
+            });
+            const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+            ground.rotation.x = -Math.PI / 2;
+            ground.position.y = -0.1; // Sedikit di bawah rumput
+            ground.receiveShadow = true;
+            scene.add(ground);
+            
+            // Tambahkan grid helper
+            const gridHelper = new THREE.GridHelper(100, 100);
+            gridHelper.position.y = 0.01;
+            scene.add(gridHelper);
+            
+            // Event listeners untuk kontrol
+            document.getElementById('create-grass').addEventListener('click', createGrass);
+            document.getElementById('clear-grass').addEventListener('click', clearGrass);
+            
+            // Event listeners untuk update nilai
+            document.getElementById('grass-size-width').addEventListener('input', updateSizeWidthValue);
+            document.getElementById('grass-size-height').addEventListener('input', updateSizeHeightValue);
+            document.getElementById('grass-scale').addEventListener('input', updateScaleValue);
+            
+            // Event listener untuk toggle tipe rumput
+            document.getElementById('grass-type').addEventListener('change', toggleGrassTypeControls);
+            
+            // Inisialisasi nilai
+            updateSizeWidthValue();
+            updateSizeHeightValue();
+            updateScaleValue();
+            toggleGrassTypeControls();
+            
+            // Mulai animasi
+            animate();
+        }
+        
+        // Update nilai lebar
+        function updateSizeWidthValue() {
+            const value = document.getElementById('grass-size-width').value;
+            document.getElementById('grass-size-width-value').textContent = value;
+        }
+        
+        // Update nilai panjang
+        function updateSizeHeightValue() {
+            const value = document.getElementById('grass-size-height').value;
+            document.getElementById('grass-size-height-value').textContent = value;
+        }
+        
+        // Update nilai skala
+        function updateScaleValue() {
+            const value = document.getElementById('grass-scale').value;
+            document.getElementById('grass-scale-value').textContent = value;
+        }
+        
+        // Toggle kontrol berdasarkan tipe rumput
+        function toggleGrassTypeControls() {
+            const grassType = document.getElementById('grass-type').value;
+            const localModelControls = document.getElementById('local-model-controls');
+            
+            if (grassType === 'local') {
+                localModelControls.style.display = 'block';
+            } else {
+                localModelControls.style.display = 'none';
+            }
+        }
+        
+        // Buat rumput
+        function createGrass() {
+            const grassType = document.getElementById('grass-type').value;
+            const grassDensity = document.getElementById('grass-density').value;
+            const grassSizeWidth = parseInt(document.getElementById('grass-size-width').value);
+            const grassSizeHeight = parseInt(document.getElementById('grass-size-height').value);
+            const grassScale = parseFloat(document.getElementById('grass-scale').value);
+            
+            // Konfigurasi untuk rumput
+            const config = {
+                size: { width: grassSizeWidth, height: grassSizeHeight },
+                density: grassDensity,
+                scale: grassScale,
+                position: { x: 0, y: 0, z: 0 },
+                rotation: { x: 0, y: 0, z: 0 }
+            };
+            
+            // Jika menggunakan model lokal
+            if (grassType === 'local') {
+                const localModelPath = document.getElementById('local-model-path').value;
+                config.useLocalModel = true;
+                config.localModelPath = localModelPath;
+            }
+            
+            // Buat rumput
+            RealisticElements.createRealisticGrass(config, (grass) => {
+                scene.add(grass);
+                grassObjects.push(grass);
+            });
+        }
+        
+        // Hapus semua rumput
+        function clearGrass() {
+            for (let i = 0; i < grassObjects.length; i++) {
+                scene.remove(grassObjects[i]);
+            }
+            grassObjects = [];
+        }
+        
+        // Fungsi animasi
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Update kontrol
+            controls.update();
+            
+            // Render scene
+            renderer.render(scene, camera);
+        }
+        
+        // Fungsi untuk resize window
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // Event listener
+        window.addEventListener('resize', onWindowResize);
+        
+        // Mulai aplikasi
+        window.onload = init;
+    </script>
+</body>
+</html> 
